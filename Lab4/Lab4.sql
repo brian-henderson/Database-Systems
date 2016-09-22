@@ -12,3 +12,16 @@ WHERE aid in ( SELECT aid
                WHERE cid = 'c006'
              )
 ;
+
+-- 2: Get the ids of products ordered through any agent	who	takes at least one order 
+--    from a customer in Kyoto, sorted by pid from highest to lowest --
+SELECT distinct pid
+FROM orders
+WHERE aid in ( SELECT aid
+			   FROM orders
+			   WHERE cid in ( SELECT cid
+			   				  FROM customers
+			   				  WHERE city = 'Kyoto'
+             				) 
+             )
+ORDER BY pid DESC ;
