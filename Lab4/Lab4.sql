@@ -1,8 +1,8 @@
--- ==================================================================================
+-- =======================================================================================
 -- Brian Henderson
 -- Lab 4
 -- DUE: 9/29/2016
--- ==================================================================================
+-- =======================================================================================
 
 -- 1: Get the cities of agents booking an order for a customer whose cid is 'c006' --
 SELECT distinct city
@@ -25,3 +25,12 @@ WHERE aid in ( SELECT aid
              				) 
              )
 ORDER BY pid DESC ;
+
+-- 3: Gets the ids and names of customers who did not place	an order through agent a03 --
+SELECT cid, name
+FROM customers
+WHERE cid IN ( SELECT cid
+               FROM orders
+			   WHERE aid <> 'a03'
+             )
+;
