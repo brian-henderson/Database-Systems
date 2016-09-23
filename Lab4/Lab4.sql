@@ -7,7 +7,7 @@
 -- 1: Get the cities of agents booking an order for a customer whose cid is 'c006' --
 SELECT distinct city
 FROM agents
-WHERE aid in ( SELECT aid
+WHERE aid IN ( SELECT aid
                FROM orders
                WHERE cid = 'c006'
              )
@@ -17,12 +17,12 @@ WHERE aid in ( SELECT aid
 --    from a customer in Kyoto, sorted by pid from highest to lowest --
 SELECT distinct pid
 FROM orders
-WHERE aid in ( SELECT aid
-			   FROM orders
-			   WHERE cid in ( SELECT cid
+WHERE aid IN ( SELECT aid
+               FROM orders
+               WHERE cid in ( SELECT cid
                               FROM customers
                               WHERE city = 'Kyoto'
-             				) 
+                            ) 
              )
 ORDER BY pid DESC ;
 
