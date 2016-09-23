@@ -20,8 +20,8 @@ FROM orders
 WHERE aid in ( SELECT aid
 			   FROM orders
 			   WHERE cid in ( SELECT cid
-			   				  FROM customers
-			   				  WHERE city = 'Kyoto'
+                              FROM customers
+                              WHERE city = 'Kyoto'
              				) 
              )
 ORDER BY pid DESC ;
@@ -31,6 +31,20 @@ SELECT cid, name
 FROM customers
 WHERE cid IN ( SELECT cid
                FROM orders
-			   WHERE aid <> 'a03'
+               WHERE aid <> 'a03'
+             )
+;
+
+
+-- 6: Gets the name, discounts, and city for all customers who place orders through agents 
+--    in Dallas or New York.	
+SELECT name, discount, city
+FROM customers
+WHERE cid IN ( SELECT cid
+               FROM orders
+               WHERE aid IN ( SELECT aid
+                              FROM agents
+                              WHERE city IN ( 'Dallas' , 'New York' )
+                            ) 
              )
 ;
