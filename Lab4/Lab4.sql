@@ -35,6 +35,17 @@ WHERE cid IN ( SELECT cid
              )
 ;
 
+-- 5: Gets the ids of products not ordered by any customers who placed any order through
+--    agent a08 in pid order from highest to lowest. --	
+
+SELECT distinct pid 
+FROM orders
+WHERE cid NOT IN ( SELECT cid
+                   FROM orders
+                   WHERE aid='a08'
+                 )
+ORDER BY pid DESC ;
+
 
 -- 6: Gets the name, discounts, and city for all customers who place orders through agents 
 --    in Dallas or New York.	
