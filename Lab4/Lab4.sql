@@ -4,7 +4,7 @@
 -- DUE: 9/29/2016
 -- =======================================================================================
 
--- 1: Get the cities of agents booking an order for a customer whose cid is 'c006' --
+-- 1: Gets the cities of agents booking an order for a customer whose cid is 'c006' --
 SELECT distinct city
 FROM agents
 WHERE aid IN ( SELECT aid
@@ -13,7 +13,7 @@ WHERE aid IN ( SELECT aid
              )
 ;
 
--- 2: Get the ids of products ordered through any agent	who	takes at least one order 
+-- 2: Gets the ids of products ordered through any agent	who takes at least one order 
 --    from a customer in Kyoto, sorted by pid from highest to lowest --
 SELECT distinct pid
 FROM orders
@@ -26,7 +26,7 @@ WHERE aid IN ( SELECT aid
              )
 ORDER BY pid DESC ;
 
--- 3: Gets the ids and names of customers who did not place	an order through agent a03 --
+-- 3: Gets the ids and names of customers who did not place an order through agent a03 --
 SELECT cid, name
 FROM customers
 WHERE cid IN ( SELECT cid
@@ -68,4 +68,15 @@ WHERE cid IN ( SELECT cid
                               WHERE city IN ( 'Dallas' , 'New York' )
                             ) 
              )
+;
+
+-- 7: Gets all customers who have the same discount as that of any  customers in 
+--    Dallas or London --
+SELECT name
+FROM customers
+WHERE city NOT IN ( 'Dallas' , 'London' ) 
+  AND discount IN ( SELECT discount
+                    FROM customers
+                    WHERE city IN ( 'Dallas' , 'London' )
+                  )
 ;
