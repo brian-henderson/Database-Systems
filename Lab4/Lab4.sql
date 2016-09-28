@@ -41,7 +41,7 @@ FROM orders
 WHERE pid='p01'
   AND cid IN ( SELECT cid
                FROM orders
-               WHERE pid='p07'
+               WHERE pid = 'p07'
              )
 ;
 
@@ -52,7 +52,7 @@ SELECT distinct pid
 FROM orders
 WHERE cid NOT IN ( SELECT cid
                    FROM orders
-                   WHERE aid='a08'
+                   WHERE aid = 'a08'
                  )
 ORDER BY pid DESC ;
 
