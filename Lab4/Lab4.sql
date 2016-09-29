@@ -80,3 +80,33 @@ WHERE city NOT IN ( 'Dallas' , 'London' )
                     WHERE city IN ( 'Dallas' , 'London' )
                   )
 ;
+
+
+/* 8: Check Constraints
+    
+        Check constraints specify data values that are allowed in the coloumns of the table. 
+    Check constraints are good because they force user to enter the desired data. The advantage
+    of this is that it allows for more accurate data. A good use for a check constraint would
+    be if the table is looking for a specfic set of entries.  This ensures that the data is
+    streamlined and accurate. A bad use for a check constraint would be if the data entered has
+    more acceptable options than what is listed in the check constraint.
+    
+    Good Example:
+    1. Checking gender input data.
+        CHECK (gender = 'F' or gender = 'M')
+        This is a good use of a check constraint because when entering gender data there are
+        only two valid options. 
+        
+
+    Bad Example:
+    1.  Checking a name input data
+        This would be a very bad use of a check constraint because there is a vast set of names
+        and would be very difficult, nearly impossible, to check every single name for validity.
+
+
+        The differences betweent the two examples is that the first example, the good one, has a
+    definite set of valid data entries, in this case it is two. The second example, the bad one, 
+    has an indefinite number of data entries. It would be nearly impossible to check every name
+    entered for validity, but for gender it makes sense because there are only two options and
+    having a check constraint makes the data more streamlined and accurate.
+*/ 
