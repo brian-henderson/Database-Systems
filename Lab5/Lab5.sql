@@ -20,3 +20,7 @@ WHERE cid NOT IN ( SELECT cid
                  )
 ;
 
+-- 4: Shows the names of customers who have never placed an order. (Using an outer join ) --
+SELECT c.name
+FROM customers c LEFT OUTER JOIN orders o ON c.cid = o.cid
+WHERE o.cid is null ;
