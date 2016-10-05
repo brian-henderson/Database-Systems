@@ -32,3 +32,8 @@ FROM customers c, agents a, orders o
 WHERE o.cid = c.cid 
   AND o.aid = a.aid
   AND c.city = a.city ;
+
+
+-- 6: Shows the names of customers and agents that reside in the same city --
+SELECT c.name AS "CustomerName" , a.name AS "AgentName" , a.city AS "SharedCity"
+FROM customers c INNER JOIN agents a ON a.city=c.city ;
