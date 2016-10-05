@@ -9,9 +9,8 @@ SELECT a.city
 FROM  agents a,
       orders o
 WHERE o.aid = a.aid
-  AND o.cid='c006' ;
-  
-  
+  AND o.cid = 'c006' ;
+ 
 -- 3: Shows the names of customers who have never placed an order. (Using a subquery ) --
 SELECT name
 FROM customers
@@ -33,7 +32,18 @@ WHERE o.cid = c.cid
   AND o.aid = a.aid
   AND c.city = a.city ;
 
-
 -- 6: Shows the names of customers and agents that reside in the same city --
 SELECT c.name AS "CustomerName" , a.name AS "AgentName" , a.city AS "SharedCity"
-FROM customers c INNER JOIN agents a ON a.city=c.city ;
+FROM customers c INNER JOIN agents a ON a.city = c.city ;
+
+-- 7: Shows the name and city of customers who live in the city that makes the fewest different  
+--    kinds of products.
+SELECT name, city
+FROM customers
+WHERE city IN ( SELECT city
+                FROM products
+                GROUP BY city
+                ORDER BY count(*) ASC 
+                LIMIT 1
+              )
+;
