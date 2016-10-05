@@ -10,3 +10,13 @@ FROM  agents a,
       orders o
 WHERE o.aid = a.aid
   AND o.cid='c006' ;
+  
+  
+-- 3: Shows the names of customers who have never placed an order. (Using a subquery ) --
+SELECT name
+FROM customers
+WHERE cid NOT IN ( SELECT cid
+                   FROM orders
+                 )
+;
+
