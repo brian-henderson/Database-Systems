@@ -24,3 +24,11 @@ WHERE cid NOT IN ( SELECT cid
 SELECT c.name
 FROM customers c LEFT OUTER JOIN orders o ON c.cid = o.cid
 WHERE o.cid is null ;
+
+-- 5: Shows the names of customers who place at least one order through an agent in their 
+--    own city along with those agents names --
+SELECT DISTINCT c.name AS "CustomerName" , a.name AS "AgentName"
+FROM customers c, agents a, orders o
+WHERE o.cid = c.cid 
+  AND o.aid = a.aid
+  AND c.city = a.city ;
