@@ -10,6 +10,15 @@ FROM  agents a,
       orders o
 WHERE o.aid = a.aid
   AND o.cid = 'c006' ;
+  
+-- 2: Shows the ids of products ordered through any agent who makes at least one order for
+--    a customer in Kyoto, sorted by PID from highest to lowest. --
+SELECT distinct ord2.pid
+FROM customers c,
+     orders ord1 FULL OUTER JOIN orders ord2 ON ord1.aid = ord2.aid
+WHERE c.city = 'Kyoto'
+  AND c.cid  = ord1.cid
+ORDER BY ord2.pid ;
  
 -- 3: Shows the names of customers who have never placed an order. (Using a subquery ) --
 SELECT name
