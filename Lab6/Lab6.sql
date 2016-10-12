@@ -25,7 +25,7 @@ WHERE priceUSD < ( SELECT AVG(priceUSD)
                  )
 ORDER BY name DESC ;
 
--- 3: Display the customer name, pid ordered, and the total for all orders, sorted by 
+-- 3: Displays the customer name, pid ordered, and the total for all orders, sorted by 
 --    total from low to high.
 SELECT c1.name, c2.cid, o.pid, SUM(totalUSD) AS totalUSD
 FROM Customers c1, Customers c2, Orders o
@@ -34,10 +34,18 @@ WHERE c1.cid = c2.cid
 GROUP BY c1.name, c2.cid, o.pid
 ORDER BY totalUSD ASC ;
 
--- 4: Display all customer names (in alphabetical order) and their total ordered, and nothing
---    more. Use coalesce to avoid showing NULLs.
+-- 4: Displays all customer names (in alphabetical order) and their total ordered, and
+--    nothing more.
 SELECT c.name, COALESCE(sum(totalUSD), '0.00') AS sumTotalUSD
 FROM Customers c LEFT OUTER JOIN Orders o ON c.cid = o.cid
 GROUP BY o.cid, c.name
 ORDER BY c.name ASC;
 
+-- 5: Displays the names of all customers who bought products from agents based in New York
+--    along with the names of the products they ordered, and the names of the agents who sold it to them.
+SELECT c.name AS "Customer", p.name AS "Product", a.name AS "Agent"
+FROM Customers c, Agents a, Products p, Orders o
+WHERE a.city = 'New York'
+  AND o.cid  = c.cid
+  AND o.aid  = a.aid
+  AND o.pid  = p.pid ;
