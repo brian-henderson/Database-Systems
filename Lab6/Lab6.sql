@@ -49,3 +49,20 @@ WHERE a.city = 'New York'
   AND o.cid  = c.cid
   AND o.aid  = a.aid
   AND o.pid  = p.pid ;
+
+-- 6: Write a query to check the accuracy of the dollars column in the Orders table. This means calculating
+--    Orders.totalUSD from data in other tables and comparing those values to the values in Orders.totalUSD. 
+--    Display all rows in Orders where Orders.totalUSD is incorrect, if any.
+DROP VIEW IF EXISTS checkDollars ;
+CREATE VIEW checkDollars
+AS
+SELECT o.ordnum, c.discount, p.priceUSD, o.qty, 
+       ((o.qty * p.priceUSD) - (o.qty * p.priceUSD * (c.discount/100))) AS viewCheckDollars_totalUSD
+FROM Customers c, Orders o, Products p
+WHERE o.cid = c.cid
+  AND o.pid = p.pid ;
+
+SELECT o.*, v.viewCheckDollars_totalUSD AS "CorrectTotalUSD" 
+FROM Orders o, checkDollars v -- v represents the view
+WHERE v.ordnum = o.ordnum
+  AND v.viewCheckDollars_totalUSD != o.totalUSD ;
