@@ -1,8 +1,8 @@
--- =======================================================================================
+-- ===================================================================================================
 -- Brian Henderson
 -- Lab 6
 -- DUE: 10/13/2016
--- =======================================================================================
+-- ===================================================================================================
 
 -- 1: Displays the name and city of customers who live in any city that makes the most 
 --    different kinds of products.
@@ -66,3 +66,21 @@ SELECT o.*, v.viewCheckDollars_totalUSD AS "CorrectTotalUSD"
 FROM Orders o, checkDollars v -- v represents the view
 WHERE v.ordnum = o.ordnum
   AND v.viewCheckDollars_totalUSD != o.totalUSD ;
+  
+  
+
+/* 7: What’s the difference between a LEFT OUTER JOIN and a RIGHT OUTER JOIN? Give example queries in 
+      SQL to demonstrate. (Feel free to use the CAP database to make your points here.)
+      
+      A LEFT OUTER JOIN will display all the rows of the "left" table, the table specifed on the left side 
+      of the OUTER JOIN, regardless of whether there are any matching coloumns. A RIGHT OUTER JOIN will display
+      all the rows of the "right" table, the table specified on the right side of the OUTER JOIN, regardless of
+      whether there are any matching coloumns. A good use for outer joins would be in a system for nurses and
+      patients to determine which nurse doesn't have a patient and vice versa. In the CAP database, outer joins
+      could be used to determine which products were not ordered:
+      
+      SELECT products.name
+      FROM products LEFT OUTER JOIN orders ON orders.pid = products.pid
+      WHERE ordnum IS NULL ;
+    
+*/
